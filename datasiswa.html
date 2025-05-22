@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/output.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="shortcut icon" href="dist/images/ics 1.svg" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Data Siswa</title>
+
+    <style>
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+    </style>
+</head>
+
+<body class=" font-Poppins">
+ <!-- navbar -->
+ <nav class="fixed top-0 z-50 w-full bg-white border-b shadow-md navbar">
+    <div class="flex items-center w-full px-3 py-3 lg:px-5 lg:pl-3">
+        <button id="sidebar-toggle" class="inline-flex items-center p-2 text-sm text-gray-900 rounded-lg sm:hidden">
+            <span class="sr-only">Open sidebar</span>
+            <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                    d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
+                    clip-rule="evenodd"></path>
+            </svg>
+        </button>
+        <div class="flex items-center flex-1 navbar-logo pl-4 sm:pl-0">
+            <div class="w-full flex justify-center sm:justify-start">
+                <img src="img/al.png" class="h-[80px]" alt="DevCount Logo" />
+            </div>
+        </div>
+
+
+        <div class="flex items-center">
+            <button type="button" id="user-menu-toggle" class="flex p-2 text-sm" aria-expanded="false">
+                <span class="sr-only">Open user menu</span>
+
+                <!-- Gambar yang hanya muncul di desktop -->
+                <img class="h-[60px] w-[60px] rounded-full shadow-md hidden sm:block" src="img/26.png"
+                    alt="user photo">
+
+                <!-- Nama pengguna yang hanya muncul di desktop -->
+                <p class="m-2 mt-5 mr-2 font-bold hidden sm:block">Haris Darmawan</p>
+            </button>
+        </div>
+
+    </div>
+</nav>
+<!-- end navbar -->
+
+<!-- menu -->
+<aside id="logo-sidebar"
+    class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 bg-[#27783D] border-r shadow-md sidebar sidebar-closed"
+    aria-label="Sidebar">
+    <div class="h-full px-3 pb-4 mt-10 overflow-y-auto mt-16">
+        <div class="flex items-center justify-center">
+            <img src="img/26.png" alt=""
+                class="rounded-full h-[150px] w-[150px] shadow-lg border-2 border-[#289846]">
+        </div>
+
+
+        <p class="font-bold text-center mt-4 text-white">Haris Darmawan</p>
+        <ul class="mt-4 space-y-2 font-medium" x-data="{ openAdmin: false, openPresensi: false, openSiswa: false }">
+            <hr class="border-gray-600">
+
+            <!-- Dashboard -->
+            <li>
+                <a href="index.html"
+                    class="flex items-center gap-3 px-4 py-2 text-white rounded-full bg-green-600 hover:bg-green-500  ">
+                    <img src="icons/dash.svg" class="w-5 h-5" alt="Dashboard Icon">
+                    <span>Dashboard</span>
+                </a>
+            </li>
+
+            <!-- Admin -->
+            <li>
+                <button @click="openAdmin = !openAdmin"
+                    class="flex items-center justify-between w-full px-4 py-2 text-white rounded-full hover:bg-green-500 transition-all">
+                    <div class="flex items-center gap-3">
+                        <img src="icons/admin.svg" class="w-5 h-5" alt="Admin Icon">
+                        <span>Admin</span>
+                    </div>
+                    <svg class="w-4 h-4 transition-transform" :class="openAdmin ? 'rotate-90' : ''" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+                <ul x-show="openAdmin" class="ml-10 mt-1 space-y-1 text-sm text-white" x-transition>
+                    <li><a href="admin.html"
+                            class="block flex items-center gap-3 px-4 py-2 text-white rounded-full hover:bg-green-500 transition-all">Data
+                            Admin</a></li>
+                </ul>
+            </li>
+
+            <!-- Data Siswa -->
+            <li>
+                <button @click="openSiswa = !openSiswa"
+                    class="flex items-center justify-between w-full px-4 py-2 text-white rounded-full hover:bg-green-500 transition-all">
+                    <div class="flex items-center gap-3">
+                        <img src="icons/stu.svg" class="w-5 h-5" alt="Data Siswa Icon">
+                        <span>Data Siswa</span>
+                    </div>
+                    <svg class="w-4 h-4 transition-transform" :class="openSiswa ? 'rotate-90' : ''" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+                <ul x-show="openSiswa" class="ml-10 mt-1 space-y-1 text-sm text-white" x-transition>
+                    <li><a href="datasiswa.html"
+                            class="block flex items-center gap-3 px-4 py-2 text-white rounded-full hover:bg-green-500 transition-all">
+                            Absen Siswa</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="absen.html"
+                    class="flex itemscenter gap-3 px-4 py-2 text-white rounded-full hover:bg-green-500  ">
+                    <img src="icons/presensi.svg" class="w-5 h-5" alt="Dashboard Icon">
+                    <span>Absen Siswa</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="repport.html"
+                    class="flex itemscenter gap-3 px-4 py-2 text-white rounded-full hover:bg-green-500  ">
+                    <img src="icons/sett.svg" class="w-5 h-5" alt="Dashboard Icon">
+                    <span>Report</span>
+                </a>
+            </li>
+
+            <!-- Logout -->
+            <li>
+                <a href="login.html"
+                    class="flex items-center gap-3 px-4 py-2 text-white rounded-full hover:bg-green-600 transition-all">
+                    <img src="icons/log.svg" class="w-5 h-5" alt="Logout Icon">
+                    <span>Logout</span>
+                </a>
+            </li>
+
+
+        </ul>
+    </div>
+</aside>
+<!-- end menu -->
+
+  <!-- content -->
+<div class="p-4 mt-20 mb-20 sm:ml-64">
+    <!-- Wrapper -->
+    <div class="flex flex-col gap-4 mt-6">
+        <!-- CARD: DATA SISWA -->
+        <div class="bg-white border border-[#27783D] rounded-lg shadow-md p-4 w-full">
+            <!-- Tombol -->
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                <a href="tambahdata.html" class="bg-[#27783D] py-4 px-6 rounded-full text-white text-center w-fit sm:w-auto text-sm sm:text-base">
+                    <i class="fa-solid fa-plus"></i>
+                </a>
+            </div>
+            <!-- Judul -->
+            <h2 class="text-center text-lg font-bold mb-6">DATA SISWA</h2>
+            
+            <!-- Tabel responsif -->
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm text-left text-gray-500 min-w-[640px]">
+                    <thead class="bg-gray-100 text-black font-semibold text-sm uppercase">
+                        <tr>
+                            <th class="px-4 py-2">No</th>
+                            <th class="px-4 py-2">Images</th>
+                            <th class="px-4 py-2">Nama Siswa</th>
+                            <th class="px-4 py-2">Card ID</th>
+                            <th class="px-4 py-2">No. HP</th>
+                            <th class="px-4 py-2">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Baris data siswa -->
+                        <tr class="border-t">
+                            <td class="px-4 py-2">1</td>
+                            <td class="px-4 py-2"><img src="img/26.png" alt="" class="h-[50px]"></td>
+                            <td class="px-4 py-2">Haris Darmawan</td>
+                            <td class="px-4 py-2">221011400534</td>
+                            <td class="px-4 py-2">08000312121</td>
+                            <td class="px-4 py-2">
+                                <div class="flex flex-wrap gap-2">
+                                    <button class="bg-green-600 text-white px-4 py-3 rounded-full text-sm"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="bg-red-600 text-white px-4 py-3 rounded-full text-sm"><i class="fa-solid fa-trash"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="border-t">
+                            <td class="px-4 py-2">1</td>
+                            <td class="px-4 py-2"><img src="img/7.png" alt="" class="h-[50px]"></td>
+                            <td class="px-4 py-2">Muhammad Afdan Alghifari</td>
+                            <td class="px-4 py-2">221011400534</td>
+                            <td class="px-4 py-2">08000312121</td>
+                            <td class="px-4 py-2">
+                                <div class="flex flex-wrap gap-2">
+                                    <button class="bg-green-600 text-white px-4 py-3 rounded-full text-sm"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="bg-red-600 text-white px-4 py-3 rounded-full text-sm"><i class="fa-solid fa-trash"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="border-t">
+                            <td class="px-4 py-2">1</td>
+                            <td class="px-4 py-2"><img src="img/1.png" alt="" class="h-[50px]"></td>
+                            <td class="px-4 py-2">Jihan Nabiylah</td>
+                            <td class="px-4 py-2">221011400534</td>
+                            <td class="px-4 py-2">08000312121</td>
+                            <td class="px-4 py-2">
+                                <div class="flex flex-wrap gap-2">
+                                    <button class="bg-green-600 text-white px-4 py-3 rounded-full text-sm"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="bg-red-600 text-white px-4 py-3 rounded-full text-sm"><i class="fa-solid fa-trash"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- Duplikat baris -->
+                        <!-- Tambahkan baris lainnya seperti contoh di atas -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end content -->
+
+
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+    <script>
+        // Toggle sidebar visibility on mobile
+        document.getElementById('sidebar-toggle').addEventListener('click', function () {
+            const sidebar = document.getElementById('logo-sidebar');
+            sidebar.classList.toggle('sidebar-open');
+            sidebar.classList.toggle('sidebar-closed');
+        });
+
+        // Toggle user menu visibility
+        document.getElementById('user-menu-toggle').addEventListener('click', function () {
+            const menu = document.getElementById('dropdown-user');
+            menu.classList.toggle('show');
+        });
+    </script>
+
+    <script>
+        function toggleMaxHeight(button) {
+            const menuDropdown = button.parentElement;
+            menuDropdown.classList.toggle('max-h-fit');
+            menuDropdown.classList.toggle('shadow-[0_10px_16px_0_#0A090B0D]');
+            menuDropdown.classList.toggle('z-10');
+        }
+
+        document.addEventListener('click', function (event) {
+            const menuDropdowns = document.querySelectorAll('.menu-dropdown');
+            const clickedInsideDropdown = Array.from(menuDropdowns).some(function (dropdown) {
+                return dropdown.contains(event.target);
+            });
+
+            if (!clickedInsideDropdown) {
+                menuDropdowns.forEach(function (dropdown) {
+                    dropdown.classList.remove('max-h-fit');
+                    dropdown.classList.remove('shadow-[0_10px_16px_0_#0A090B0D]');
+                    dropdown.classList.remove('z-10');
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

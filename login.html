@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Admin - Al Azhar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="h-screen flex items-center justify-center bg-gray-100 bg-[url('img/slider01.jpg')] bg-cover bg-center">
+    <div class="w-full max-w-4xl h-auto md:h-[500px] bg-white rounded-xl shadow-lg flex flex-col md:flex-row overflow-hidden">
+        <div class="w-1/2 bg-[#2e7d32] hidden md:flex items-center justify-center relative">
+            <div class="bg-white w-[650px] h-[650px] rounded-full absolute -left-64"></div>
+            <img src="img/al.png" alt="Logo Al Azhar" class="relative z-10 w-[280px]">
+        </div>
+        <div class="w-full md:w-1/2 bg-[#2e7d32] flex flex-col justify-center px-6 sm:px-12 text-white py-12 md:py-0">
+            <h2 class="text-2xl font-bold mb-8 text-center">WELCOME ADMIN</h2>
+            <form class="flex flex-col gap-4">
+                <div>
+                    <label class="text-sm font-bold">Username</label>
+                    <input type="text" placeholder="Masukkan ID"
+                        class="w-full mt-1 px-4 py-2 rounded-md bg-white shadow-md text-gray-800 focus:outline-none">
+                </div>
+                <div>
+                    <label class="text-sm font-bold">PASSWORD</label>
+                    <input type="password" placeholder="Masukkan Password"
+                        class="w-full mt-1 px-4 py-2 rounded-md bg-white shadow-md text-gray-800 focus:outline-none">
+                </div>
+                <a href="index.html" class="mt-6 w-full py-2 bg-white text-[#2e7d32] font-bold rounded-md hover:bg-white shadow-md transition text-center">SIGN UP</a>
+                <!-- <button type="submit" 
+                    class="mt-6 w-full py-2 bg-white text-[#2e7d32] font-bold rounded-md hover:bg-white shadow-md transition">
+                    SIGN UP
+                </button> -->
+            </form>
+        </div>
+    </div>
+</body>
+</html>

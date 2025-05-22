@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/output.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="shortcut icon" href="dist/images/ics 1.svg" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Dashboard</title>
+
+    <style>
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+    </style>
+</head>
+
+<body class="font-poppins">
+
+    <!-- navbar -->
+    <nav class="fixed top-0 z-50 w-full bg-white border-b shadow-md navbar">
+        <div class="flex items-center w-full px-3 py-3 lg:px-5 lg:pl-3">
+            <button id="sidebar-toggle" class="inline-flex items-center p-2 text-sm text-gray-900 rounded-lg sm:hidden">
+                <span class="sr-only">Open sidebar</span>
+                <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
+                        clip-rule="evenodd"></path>
+                </svg>
+            </button>
+            <div class="flex items-center flex-1 navbar-logo pl-4 sm:pl-0">
+                <a href="index.html" class="w-full flex justify-center sm:justify-start">
+                    <img src="img/al.png" class="h-[80px]" alt="DevCount Logo" />
+                </a>
+            </div>
+
+
+            <div class="flex items-center">
+                <button type="button" id="user-menu-toggle" class="flex p-2 text-sm" aria-expanded="false">
+                    <span class="sr-only">Open user menu</span>
+
+                    <!-- Gambar yang hanya muncul di desktop -->
+                    <img class="h-[60px] w-[60px] rounded-full shadow-md hidden sm:block" src="img/me.jpg"
+                        alt="user photo">
+
+                    <!-- Nama pengguna yang hanya muncul di desktop -->
+                    <p class="m-2 mt-5 mr-2 font-bold hidden sm:block">Haris Darmawan</p>
+                </button>
+            </div>
+
+        </div>
+    </nav>
+    <!-- end navbar -->
+
+    <!-- menu -->
+    <aside id="logo-sidebar"
+        class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 bg-[#27783D] border-r shadow-md sidebar sidebar-closed"
+        aria-label="Sidebar">
+        <div class="h-full px-3 pb-4 mt-10 overflow-y-auto mt-16">
+            <div class="flex items-center justify-center">
+                <img src="img/me.jpg" alt=""
+                    class="rounded-full h-[150px] w-[150px] shadow-lg border-2 border-[#289846]">
+            </div>
+
+
+            <p class="font-bold text-center mt-4 text-white">Haris Darmawan</p>
+            <ul class="mt-4 space-y-2 font-medium" x-data="{ openAdmin: false, openPresensi: false, openSiswa: false }">
+                <hr class="border-gray-600">
+            
+                <!-- Dashboard -->
+                <li>
+                    <a href="index.html"
+                        class="flex items-center gap-3 px-4 py-2 text-white rounded-full bg-green-600 hover:bg-green-500 transition-all">
+                        <img src="icons/dash.svg" class="w-5 h-5" alt="Dashboard Icon">
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+            
+                <!-- Admin -->
+                <li>
+                    <button @click="openAdmin = !openAdmin"
+                        class="flex items-center justify-between w-full px-4 py-2 text-white rounded-lg hover:bg-green-500 transition-all">
+                        <div class="flex items-center gap-3">
+                            <img src="icons/admin.svg" class="w-5 h-5" alt="Admin Icon">
+                            <span>Admin</span>
+                        </div>
+                        <svg class="w-4 h-4 transition-transform" :class="openAdmin ? 'rotate-90' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                    <ul x-show="openAdmin" class="ml-10 mt-1 space-y-1 text-sm text-white" x-transition>
+                        <li><a href="admin.html" class="block flex items-center gap-3 px-4 py-2 text-white rounded-full hover:bg-green-500 transition-all">Data Admin</a></li>
+                    </ul>
+                </li>
+            
+                <!-- Presensi -->
+                <li>
+                    <button @click="openPresensi = !openPresensi"
+                        class="flex items-center justify-between w-full px-4 py-2 text-white rounded-lg hover:bg-green-500 transition-all">
+                        <div class="flex items-center gap-3">
+                            <img src="icons/cra.svg" class="w-5 h-5" alt="Presensi Icon">
+                            <span>Presensi</span>
+                        </div>
+                        <svg class="w-4 h-4 transition-transform" :class="openPresensi ? 'rotate-90' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                    <ul x-show="openPresensi" class="ml-10 mt-1 space-y-1 text-sm text-white" x-transition>
+                        <li><a href="datasiswa.html" class="block flex items-center gap-3 px-4 py-2 text-white rounded-full hover:bg-green-500 transition-all">Presensi Harian</a></li>
+                    </ul>
+                </li>
+            
+                <!-- Data Siswa -->
+                <li>
+                    <button @click="openSiswa = !openSiswa"
+                        class="flex items-center justify-between w-full px-4 py-2 text-white rounded-lg hover:bg-green-500 transition-all">
+                        <div class="flex items-center gap-3">
+                            <img src="icons/stu.svg" class="w-5 h-5" alt="Data Siswa Icon">
+                            <span>Data Siswa</span>
+                        </div>
+                        <svg class="w-4 h-4 transition-transform" :class="openSiswa ? 'rotate-90' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                    <ul x-show="openSiswa" class="ml-10 mt-1 space-y-1 text-sm text-white" x-transition>
+                        <li><a href="datasiswa.html" class="block flex items-center gap-3 px-4 py-2 text-white rounded-full hover:bg-green-500 transition-all">List Siswa</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="setting.html"
+                        class="flex itemscenter gap-3 px-4 py-2 text-white rounded-full bg-green-600 hover:bg-green-500 transition-all">
+                        <img src="icons/sett.svg" class="w-5 h-5" alt="Dashboard Icon">
+                        <span>Setting</span>
+                    </a>
+                </li>
+            
+                <!-- Logout -->
+                <li>
+                    <a href="login.html"
+                        class="flex items-center gap-3 px-4 py-2 text-white rounded-lg hover:bg-red-600 transition-all">
+                        <img src="icons/log.svg" class="w-5 h-5" alt="Logout Icon">
+                        <span>Logout</span>
+                    </a>
+                </li>
+
+                
+            </ul>
+        </div>
+    </aside>
+    <!-- end menu -->
+
+    <!-- content -->
+    <div class="p-4 mt-20 sm:ml-64">
+        <div class="flex flex-col mt-16">
+
+            <!-- Card Statistik -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+                <!-- Card 1: Total Siswa -->
+                <div class="bg-white rounded-xl shadow-md border border-[#27783D] p-6 flex flex-col gap-2">
+                    <div class="text-blue-500 text-xl">
+                        <i class="fa-solid fa-user-graduate"></i>
+                    </div>
+                    <p class="text-sm text-gray-500">Total Siswa</p>
+                    <h3 class="text-2xl font-bold text-gray-800">350</h3>
+                </div>
+
+                <!-- Card 2: Total Guru -->
+                <div class="bg-white rounded-xl shadow-md border  border-[#27783D] p-6 flex flex-col gap-2">
+                    <div class="text-green-500 text-xl">
+                        <i class="fa-solid fa-chalkboard-teacher"></i>
+                    </div>
+                    <p class="text-sm text-gray-500">Total Guru</p>
+                    <h3 class="text-2xl font-bold text-gray-800">25</h3>
+                </div>
+
+                <!-- Card 3: Jumlah Kelas -->
+                <div class="bg-white rounded-xl shadow-md border  border-[#27783D] p-6 flex flex-col gap-2">
+                    <div class="text-purple-500 text-xl">
+                        <i class="fa-solid fa-door-open"></i>
+                    </div>
+                    <p class="text-sm text-gray-500">Jumlah Kelas</p>
+                    <h3 class="text-2xl font-bold text-gray-800">12</h3>
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <!-- Wrapper untuk 2 card -->
+        <div class="flex flex-col lg:flex-row gap-4 mt-6 items-start">
+
+            <!-- CARD KIRI: DATA SISWA -->
+            <div class="bg-white border border-[#27783D] rounded-lg shadow-md flex-1 p-4">
+                <!-- Button and Search -->
+                <!-- Modal -->
+                <div id="addStudentModal"
+                    class="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center hidden">
+                    <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+                        <h2 class="text-2xl font-bold mb-4 text-center">Tambah Data Siswa</h2>
+                        <hr class="mb-5">
+
+                        <form action="#" method="POST" enctype="multipart/form-data">
+                            <!-- Upload Gambar -->
+                            <div class="mb-4">
+                                <label for="image" class="block text-sm font-medium text-gray-700">Upload Gambar</label>
+                                <input type="file" id="image" name="image" accept="image/*"
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    onchange="previewImage(event)">
+
+                                <!-- Gambar Preview -->
+                                <div class="mt-4" id="imagePreviewContainer" style="display: none;">
+                                    <img id="imagePreview" src="" alt="Image Preview"
+                                        class="w-full h-auto rounded-md shadow-md">
+                                </div>
+                            </div>
+
+                            <!-- Nama -->
+                            <div class="mb-4">
+                                <label for="name" class="block text-sm font-medium text-gray-700">Nama Siswa</label>
+                                <input type="text" id="name" name="name"
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    placeholder="Masukkan nama siswa">
+                            </div>
+
+                            <!-- Card ID -->
+                            <div class="mb-4">
+                                <label for="card_id" class="block text-sm font-medium text-gray-700">Card ID</label>
+                                <input type="text" id="card_id" name="card_id"
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    placeholder="Masukkan Card ID">
+                            </div>
+
+                            <!-- Nomor Telepon -->
+                            <div class="mb-4">
+                                <label for="phone" class="block text-sm font-medium text-gray-700">Nomor Telepon</label>
+                                <input type="text" id="phone" name="phone"
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    placeholder="Masukkan nomor telepon">
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="flex justify-end space-x-2">
+                                <button type="button"
+                                    class="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400"
+                                    onclick="closeModal()">Batal</button>
+                                <button type="submit"
+                                    class="px-4 py-2 bg-green-700 text-white rounded hover:bg-green-800">Simpan</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <h2 class="text-center text-lg font-bold mb-20">ABSENSI SISWA</h2>
+                <hr>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-500">
+                        <thead class="bg-gray-100 text-black font-semibold text-sm uppercase">
+                            <tr>
+                                <th class="px-4 py-2">No .</th>
+                                <th class="px-4 py-2">Images</th>
+                                <th class="px-4 py-2">Nama Siswa</th>
+                                <th class="px-4 py-2">Card ID</th>
+                                <th class="px-4 py-2">Nomer Handphone</th>
+                                <th class="px-4 py-2">Jam Masuk</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Row Siswa -->
+                            <tr class="border-t">
+                                <td class="px-4 py-2">1.</td>
+                                <td class="px-4 py-2"><img src="img/1.png" alt="" class="h-[50px]"></td>
+                                <td class="px-4 py-2">Indryani</td>
+                                <td class="px-4 py-2"> 221011400534</td>
+                                <td class="px-4 py-2">0896-5468-7029</td>
+                                <td class="px-4 py-2">07:00</td>
+                            </tr>
+                            <!-- Duplikat untuk contoh -->
+                            <tr class="border-t">
+                                <td class="px-4 py-2">1.</td>
+                                <td class="px-4 py-2"><img src="img/1.png" alt="" class="h-[50px]"></td>
+                                <td class="px-4 py-2">Indryani</td>
+                                <td class="px-4 py-2">221011400534</td>
+                                <td class="px-4 py-2">0896-5468-7029</td>
+                                <td class="px-4 py-2">07:00</td>
+                            </tr>
+                            <tr class="border-t">
+                                <td class="px-4 py-2">1.</td>
+                                <td class="px-4 py-2"><img src="img/1.png" alt="" class="h-[50px]"></td>
+                                <td class="px-4 py-2">Indryani</td>
+                                <td class="px-4 py-2">221011400534</td>
+                                <td class="px-4 py-2">0896-5468-7029</td>
+                                <td class="px-4 py-2">07:00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- card statistik -->
+
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+
+<script>
+    // Toggle sidebar visibility on mobile
+    document.getElementById('sidebar-toggle').addEventListener('click', function () {
+        const sidebar = document.getElementById('logo-sidebar');
+        sidebar.classList.toggle('sidebar-open');
+        sidebar.classList.toggle('sidebar-closed');
+    });
+
+    // Toggle user menu visibility
+    document.getElementById('user-menu-toggle').addEventListener('click', function () {
+        const menu = document.getElementById('dropdown-user');
+        menu.classList.toggle('show');
+    });
+</script>
+
+<script>
+    function toggleMaxHeight(button) {
+        const menuDropdown = button.parentElement;
+        menuDropdown.classList.toggle('max-h-fit');
+        menuDropdown.classList.toggle('shadow-[0_10px_16px_0_#0A090B0D]');
+        menuDropdown.classList.toggle('z-10');
+    }
+
+    document.addEventListener('click', function (event) {
+        const menuDropdowns = document.querySelectorAll('.menu-dropdown');
+        const clickedInsideDropdown = Array.from(menuDropdowns).some(function (dropdown) {
+            return dropdown.contains(event.target);
+        });
+
+        if (!clickedInsideDropdown) {
+            menuDropdowns.forEach(function (dropdown) {
+                dropdown.classList.remove('max-h-fit');
+                dropdown.classList.remove('shadow-[0_10px_16px_0_#0A090B0D]');
+                dropdown.classList.remove('z-10');
+            });
+        }
+    });
+</script>
+
+<script>
+    // Function to open modal
+    function openModal() {
+        document.getElementById('addStudentModal').classList.remove('hidden');
+    }
+
+    // Function to close modal
+    function closeModal() {
+        document.getElementById('addStudentModal').classList.add('hidden');
+        // Clear the preview when closing the modal
+        document.getElementById('imagePreview').src = '';
+        document.getElementById('imagePreviewContainer').style.display = 'none';
+    }
+
+    // Function to preview image after selecting
+    function previewImage(event) {
+        const reader = new FileReader();
+        reader.onload = function () {
+            const imagePreview = document.getElementById('imagePreview');
+            const imagePreviewContainer = document.getElementById('imagePreviewContainer');
+            imagePreview.src = reader.result;
+            imagePreviewContainer.style.display = 'block'; // Show the image preview container
+        }
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>
+
+</html>
