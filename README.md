@@ -2,7 +2,7 @@
 
 Proyek ini merupakan bagian dari **Kerja Praktek** yang bertujuan membangun sistem **Absensi Sekolah otomatis menggunakan RFID Reader (RC522)**. Sistem ini memadukan teknologi **Arduino** dan **Laravel** untuk merekam kehadiran siswa secara real-time saat kartu RFID ditempelkan ke alat pembaca.
 
-![RFID Absensi Demo](https://github.com/HariisDermawan/Sekolah-Islam-Al-Azhar-BSD/blob/main/img/login.png)
+![RFID Absensi Demo](https://github.com/HariisDermawan/AL-AZHAR-BSD-TUGAS-KP-/blob/main/img/login.png)
 
 ---
 
